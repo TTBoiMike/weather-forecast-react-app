@@ -1,7 +1,7 @@
 import React from 'react'
 import Search from './search'
 import Location from './location'
-import Forecast from './forecast'
+// import Forecast from './forecast'
 import '../App.css';
 
 
@@ -12,29 +12,31 @@ class App extends React.Component {
     super();
     this.state = {
       location: "",
-      locationKey: "",
+      coordinates: {
+        lon: "",
+        lat: ""
+      },
       currentWeather: {
         temperature: "",
+        windSpeed: "",
         summary: "",
         isDayTime: undefined
       },
+      iconDisplay: undefined,
       forecast: []
-      // {date: , minTemperature: , maxTemperature: , dayTime: "", nightTime: ""}
     }
   }
+
+  // 02ef4d3d345333c1a5f6f1a75f10207c
 
   updateLocation = (input, areaCode) => {
     let city = input.toLowerCase();
     // call fecth to api to retrieve city information
-    let locationApiResponse = fetch(`http://dataservice.accuweather.com/locations/v1/cities/${areaCode}/search?apikey=5TdNcG6ZLvSwSwmGUIFTnlWfUSdQyh8X&q=${city}`)
+    let locationApiResponse = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${areaCode}&appid=02ef4d3d345333c1a5f6f1a75f10207c&units=metric`)
     locationApiResponse.then((data) => {
       data.json().then((json) => {
-        this.updateCurrentWeather(json[0].Key)
-        this.updateForecast(json[0].Key)
-        this.setState({
-          location: json[0].LocalizedName,
-          locationKey: json[0].Key
-        })
+        console.log("json", json)
+        this.updateForecast(json.name, json.coord.lon, json.coord.lat)
       }).catch((err) => {
         console.log(err)
         alert(`Sorry, we couldn't find any information for: ${input}, ${areaCode}.`)
@@ -42,27 +44,21 @@ class App extends React.Component {
     })
   }
 
-  updateCurrentWeather(locationKey) {
-    let currentWeatherApiResponse = fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=5TdNcG6ZLvSwSwmGUIFTnlWfUSdQyh8X`)
-    currentWeatherApiResponse.then((data) => {
-      data.json().then((json) => {
-        this.setState({
-          currentWeather: {
-            temperature: json[0].Temperature.Metric.Value,
-            summary: json[0].WeatherText
-          }
-        })
-      })
-    })
-  }
-
-  // update the forecast for the location using the 'location key'
-  updateForecast(locationKey) {
-    let forecastApiResponse = fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=5TdNcG6ZLvSwSwmGUIFTnlWfUSdQyh8X`)
+  // // update the forecast for the location using the location coordinates
+  updateForecast(location, long, lat) {
+    let forecastApiResponse = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,alerts,hourly&appid=02ef4d3d345333c1a5f6f1a75f10207c&units=metric`)
     forecastApiResponse.then((data) => {
       data.json().then((json) => {
+        console.log("forecast", json)
         this.setState({
-          forecast: json.DailyForecasts
+          location: location,
+          coordinates: json.coord,
+          currentWeather: {
+            temperature: Math.round(json.current.temp),
+            windSpeed: Math.round(json.current.wind_speed),
+            summary: json.current.weather[0].description
+          },
+          forecast: json.daily
         })
       })
     })
@@ -72,7 +68,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Search updatelocation={this.updateLocation}/>
-        <Location appInformation={this.state} forecast={this.state.forecast}/>
+        <Location appInformation={this.state}/>
       </div>
     )
   }

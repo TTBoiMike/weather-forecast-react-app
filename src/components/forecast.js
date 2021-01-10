@@ -3,8 +3,6 @@ import React from 'react'
 class Forecast extends React.Component {
 
     buildForecastHTML() {
-
-        console.log("forecast", this.props.forecast)
         return this.props.forecast.map((day, i) => (
             <section className="forecast-container" key={i} id={i}>
                 <div>
@@ -15,7 +13,7 @@ class Forecast extends React.Component {
                             <p>Nighttime: {day.Night.IconPhrase}</p>
                         </div>
                         <div>
-                            <img src=""/>
+                            
                             <div>
                                 <p>{Math.floor((day.Temperature.Maximum.Value - 32) * 0.55)}<sup> o</sup>C</p>
                                 <p>{Math.floor((day.Temperature.Minimum.Value - 32) * 0.55)}<sup> o</sup>C</p>
@@ -35,7 +33,6 @@ class Forecast extends React.Component {
     render() {
         return (
             <div className="forecast">
-                <h3>Forecast</h3>
                 {this.buildForecastHTML()}
             </div>
         )
