@@ -4,26 +4,18 @@ class Forecast extends React.Component {
 
     buildForecastHTML() {
         return this.props.forecast.map((day, i) => (
-            <section className="forecast-container" key={i} id={i}>
+            <section className="d-flex justify-content-between align-items-center" key={i} id={i}>
                 <div>
-                    <div className="forecast-main">
-                        <h5>{(day.Date.substr(0, day.Date.length-15))}</h5>
-                        <div>
-                            <p>Daytime: {day.Day.IconPhrase}</p>
-                            <p>Nighttime: {day.Night.IconPhrase}</p>
-                        </div>
-                        <div>
-                            
-                            <div>
-                                <p>{Math.floor((day.Temperature.Maximum.Value - 32) * 0.55)}<sup> o</sup>C</p>
-                                <p>{Math.floor((day.Temperature.Minimum.Value - 32) * 0.55)}<sup> o</sup>C</p>
-                            </div>
-                        </div>
+                    <p><strong>Date</strong></p>
+                    <p className="forecast-text">{day.weather[0].description}<br/>wind speed: {Math.round(day.wind_speed)}mph<br/>Chance of rain: {Math.round(day.pop * 100)}%</p>
+                </div>
+                <div className="d-flex align-items-center">
+                    <img src={this.props.icon(day.weather[0].icon, true)}></img>
+                    <div>
+                        <p className="forecast-temp-max">{Math.round(day.temp.max)}<sup>o</sup>C</p>
+                        <p>{Math.round(day.temp.min)}<sup>o</sup>C</p>
                     </div>
-                    </div>
-                    <div className="forecast-footer">
-                        <a href={day.Link} target="_self">More details</a>
-                    </div>
+                </div>
             </section>
         ))
     }

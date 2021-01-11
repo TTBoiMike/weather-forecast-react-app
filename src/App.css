@@ -11,6 +11,7 @@ h1 {
   font-size: 3rem;
 }
 p {
+  margin: 0px;
   color: #606060;
 }
 body {
@@ -87,4 +88,11 @@ select {
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
+}
+/* forecast */
+.forecast-text {
+  font-size: 0.8rem;
+}
+.forecast-temp-max {
+  font-size: 1.5rem;
 }

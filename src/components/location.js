@@ -27,7 +27,6 @@ import Nighttime from '../assets/night-sky-header.jpg'
 class Location extends React.Component {
 
     displayIcon(code, time) {
-        console.log(code, time)
         if(time) {
             switch(code) {
                 case "01d":
@@ -49,7 +48,6 @@ class Location extends React.Component {
                 case "50d":
                     return D50
             }
-            console.log("day")
         } else {
             switch (code) {
                 case "01n":
@@ -98,7 +96,7 @@ class Location extends React.Component {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                         <Card.Body>
-                            {/* <Forecast forecast={this.props.forecast}/> */}
+                            <Forecast forecast={this.props.appInformation.forecast} icon={this.displayIcon}/>
                         </Card.Body>
                         </Accordion.Collapse>
                     </Card>

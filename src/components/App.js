@@ -57,7 +57,6 @@ class App extends React.Component {
     let forecastApiResponse = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,alerts,hourly&appid=02ef4d3d345333c1a5f6f1a75f10207c&units=metric`)
     forecastApiResponse.then((data) => {
       data.json().then((json) => {
-        console.log("forecast", json)
         this.setState({
           location: location,
           coordinates: json.coord,
@@ -68,7 +67,7 @@ class App extends React.Component {
             isDayTime: this.determineDayTime(json.current.weather[0].icon)
           },
           iconDisplay: json.current.weather[0].icon,
-          forecast: json.daily
+          forecast: json.daily.slice(1, 8)
         })
       })
     })
