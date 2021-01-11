@@ -27,7 +27,23 @@ class App extends React.Component {
     }
   }
 
-  // 02ef4d3d345333c1a5f6f1a75f10207c
+  clearApp = () => {
+    this.setState({
+        location: "",
+        coordinates: {
+          lon: "",
+          lat: ""
+        },
+        currentWeather: {
+          temperature: "",
+          windSpeed: "",
+          summary: "",
+          isDayTime: undefined
+        },
+        iconDisplay: undefined,
+        forecast: []
+    })
+  }
 
   determineDayTime(code) {
     if (code.includes("n")) {
@@ -78,7 +94,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Search updatelocation={this.updateLocation}/>
-        <Location appInformation={this.state}/>
+        <Location appInformation={this.state} clearapp={this.clearApp}/>
       </div>
     )
   }

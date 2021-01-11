@@ -75,6 +75,7 @@ class Location extends React.Component {
     render() {
         return (
             <div style={this.props.appInformation.location === "" ? {display: "none"} : {display: "block"}} className="location">
+                <div onClick={() => this.props.clearapp()} id="clear"><h5>X</h5></div>
                 <div className="banner" style={{backgroundImage: this.props.appInformation.currentWeather.isDayTime ? `url(${Daytime})` : `url(${Nighttime})`}}></div>
                 <div className="location-current-conditions">
                     <div className="current-weather-icon">
