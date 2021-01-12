@@ -1,14 +1,10 @@
 import React from 'react'
 import Search from './search'
 import Location from './location'
-// import Forecast from './forecast'
 import '../App.css';
 
-
-// API Key - 5TdNcG6ZLvSwSwmGUIFTnlWfUSdQyh8X
-
 class App extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       location: "",
