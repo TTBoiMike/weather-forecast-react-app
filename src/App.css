@@ -37,12 +37,12 @@ form h1 {
 }
 input {
   width: 80%;
-  height: 40px;
+  height: 60px;
   padding: 5px 10px;
 }
 select {
   width: 20%;
-  height: 40px;
+  height: 60px;
   padding: 5px 10px;
 }
 /* location */
