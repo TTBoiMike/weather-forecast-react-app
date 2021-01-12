@@ -56,7 +56,7 @@ class App extends React.Component {
   updateLocation = (input, areaCode) => {
     let city = input.toLowerCase();
     // call fecth to api to retrieve city information
-    let locationApiResponse = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${areaCode}&appid=02ef4d3d345333c1a5f6f1a75f10207c&units=metric`)
+    let locationApiResponse = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${areaCode}&appid=02ef4d3d345333c1a5f6f1a75f10207c&units=metric`)
     locationApiResponse.then((data) => {
       data.json().then((json) => {
         console.log("json", json)
