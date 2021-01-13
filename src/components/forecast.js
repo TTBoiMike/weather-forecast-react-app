@@ -17,23 +17,8 @@ class Forecast extends React.Component {
           let nameDay = days[day.getDay(day)];
           const todayName = days[today.getDay(today)];
           nameDay = nameDay === todayName ? "Today" : nameDay;
-          const months = [
-            "January",
-            "Febuary",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-          ];
-          const month = months[day.getMonth(day)];
           const date = day.getDate(day);
-          const monthDate = month + " " + date;
+          const monthDate = nameDay + " " + date;
           return monthDate
     }
 
@@ -45,7 +30,7 @@ class Forecast extends React.Component {
                     <p className="forecast-text">Summary: {day.weather[0].description}<br/>Wind speed: {Math.round(day.wind_speed)}mph<br/>Chance of rain: {Math.round(day.pop * 100)}%</p>
                 </div>
                 <div className="d-flex align-items-center">
-                    <img src={this.props.icon(day.weather[0].icon, true)}></img>
+                    <img src={this.props.icon(day.weather[0].icon, true)} alt="weahter icon"></img>
                     <div className="text-center">
                         <p className="forecast-temp-max">{Math.round(day.temp.max)}<sup>o</sup>C</p>
                         <p>{Math.round(day.temp.min)}<sup>o</sup>C</p>
@@ -54,8 +39,6 @@ class Forecast extends React.Component {
             </section>
         ))
     }
-
-
 
     render() {
         return (

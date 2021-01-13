@@ -28,7 +28,7 @@ class Search extends React.Component {
             <form onSubmit={(e) => {this.handleSubmit(e)}} onChange={(e) => {this.handleChange(e)}}>
                 <h1>UK Weather App</h1>
                 <div>
-                <input type="text" name="city" id="city" placeholder="Enter a city"/>
+                <input type="text" name="city" id="city" placeholder="Enter a city" autoFocus="on"/>
                 <select name="area" id="area">
                     <option value="GB">GB</option>
                     <option value="IE">Ireland</option> 

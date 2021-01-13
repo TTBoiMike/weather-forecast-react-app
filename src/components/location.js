@@ -47,6 +47,8 @@ class Location extends React.Component {
                     return D13
                 case "50d":
                     return D50
+                default:
+                    return "no image available"
             }
         } else {
             switch (code) {
@@ -68,6 +70,8 @@ class Location extends React.Component {
                     return N13
                 case "50n":
                     return N50
+                default:
+                    return "no image available"
             }
         }
     }
@@ -79,7 +83,7 @@ class Location extends React.Component {
                 <div className="banner" style={{backgroundImage: this.props.appInformation.currentWeather.isDayTime ? `url(${Daytime})` : `url(${Nighttime})`}}></div>
                 <div className="location-current-conditions">
                     <div className="current-weather-icon">
-                        <img src={this.displayIcon(this.props.appInformation.iconDisplay, this.props.appInformation.currentWeather.isDayTime)}></img>
+                        <img src={this.displayIcon(this.props.appInformation.iconDisplay, this.props.appInformation.currentWeather.isDayTime)} alt="weather icon"></img>
                     </div>
                     <h4>{this.props.appInformation.location}</h4>
                     <p>{this.props.appInformation.currentWeather.summary}</p>

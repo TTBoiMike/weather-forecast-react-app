@@ -24,7 +24,7 @@ export class ApiClient {
         .then(this.status)
         .catch(err => {
             console.log(err)
-            alert(`Sorry, we couldn't find forecast information.`)
+            alert(`Sorry, we couldn't find any forecast information.`)
         })
     }
 }

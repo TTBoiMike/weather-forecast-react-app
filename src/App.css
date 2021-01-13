@@ -7,6 +7,9 @@
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
 }
+*:focus {
+  outline: none;
+}
 h1 {
   font-size: 3rem;
 }
@@ -39,11 +42,14 @@ input {
   width: 80%;
   height: 60px;
   padding: 5px 10px;
+  font-size: 1.5rem
+}
+input::placeholder {
+  font-size: 1.5rem;
 }
 select {
   width: 20%;
   height: 60px;
-  padding: 5px 10px;
 }
 /* location */
 .location {
